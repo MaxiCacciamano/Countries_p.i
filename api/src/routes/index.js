@@ -115,13 +115,15 @@ router.get('/countries/:id', async(req,res)=>{
     }
 })
 router.post('/activity', async(req,res)=>{
-    let { name,
+    let { id,
+          name,
           difficulty,
           duration,
           season,
           countryId} = req.body;
    try{
      const addCountries = await Activity.create({
+        id,
         name,
         difficulty,
         duration,
