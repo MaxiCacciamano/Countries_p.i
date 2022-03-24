@@ -14,16 +14,16 @@ const router = Router();
 const getApiInfo = async () => {
     try {
         const {data} = await axios.get(urls.getAllCountries)
-        const apiInfo = await data.map((c)=>{
+        const apiInfo = await data.map((e)=>{
             return {
-           id: c.cca3,
-           name: c.name.common,
-           img: c.flags[0],
-           continents: c.continents[0],
-           capital: c.capital + c.flags[0] , //?.[0] por alguna razon pregunto y accedo
-           subregion: c.subregion,  // de lo contrario no accedo
-           area: c.area,
-           population: c.population,
+           id: e.cca3,
+           name: e.name.common,
+           img: e.flags[0],
+           continents: e.continents[0],
+           capital: e.capital + e.flags[0] , //?.[0] por alguna razon pregunto y accedo
+           subregion: e.subregion,  // de lo contrario no accedo
+           area: e.area,
+           population: e.population,
             }
         }) 
         const countryResutl = await Country.bulkCreate(apiInfo)
@@ -33,7 +33,7 @@ const getApiInfo = async () => {
         return countryResutl;
     }
     catch(err){
-        throw new Error
+        console.log("Error saving data", err);
     }
 }
 
@@ -51,7 +51,7 @@ const getDb = async()=>{
         })
     }
     catch(err){
-        throw new err;
+        console.log("Error saving data", err);
     }
 }
 
@@ -68,7 +68,7 @@ const getApiActivity = async () => {
         })
     }
     catch(err){
-        throw new err;
+        console.log("Error saving data", err);
     }
 }
 
@@ -102,16 +102,16 @@ router.get('/countries', async(req, res, next)=>{
 })
 
 router.get('/countries/:id', async(req,res)=>{
-    try{
-        const {id} = req.params;
-        const countriesAll = getDb();
-        if(id){
-            const countryId = countriesAll.find(id=>id.id===id);
-            countryId.length ? res.status(200).send(countryId) : res.status(404).send("the country does not exist");
-        }
-    }
-    catch(err){
-        console.log("The country or id does not exist",err)
+    try {
+        const idPais = req.params.idPais.toUpperCase()
+        const country = await Country.findByPk(idPais,
+            { include: Activity } 
+        )
+        country ? res.json(country) : res.sendStatus(404)
+        console.log(country)
+        
+    } catch (err) {
+        res.send(err);
     }
 })
 router.post('/activity', async(req,res)=>{
@@ -134,8 +134,8 @@ router.post('/activity', async(req,res)=>{
      }
      res.status(200).json({mesage:'Successfully loaded tourist activity', addCountries})
     }
-            catch(err){
+    catch(err){
                 console.log("Error loading country, try again", err)
             }
-        })
+    })
 module.exports = router;

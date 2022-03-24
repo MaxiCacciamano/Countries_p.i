@@ -1,0 +1,55 @@
+ body{
+   background-image: url("C:\Users\Maxi\Desktop\Developer\Codigo-Henry\p.i_countries\PI-Countries-main\client\src\img\planeta.jpg");
+   background-size: 100%;
+} 
+.title{
+    font-size:80px;
+    color: white;
+    filter: drop-shadow(0 0 0.4em rgb(211, 211, 231))
+}
+.btn{
+    font-size:18px;
+    padding: 1em 2.4em;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: transparent;
+    border: 2px solid rgb(255, 255, 255);
+    transition: 250ms ease-in-out;
+}
+.btn:hover{
+    color: white;
+    box-shadow: 
+    0 0 50px 50px #ffd2d2 inset,
+    0 0 10px #ffd2d2;
+}
+.home{
+    text-decoration: none;
+    color:white;
+}
+/* .btn{
+    padding: .6rem 1rem;
+    border: 1px solid #995309;
+    border-radius: 4px;
+    background-color: #d9750b;
+    color: #fff;
+  
+    font-size: 1.5rem;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,
+      0 1px 3px rgba(0,0,0,.2);
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(10%,#f90),to(#e76a00));
+    background-image: linear-gradient(#f90 10%,#e76a00 100%);
+  }
+  
+  .btn:hover, .btn:focus {
+    background-color: #e0811b;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(10%,#f0a100),to(#f70));
+    background-image: linear-gradient(#f0a100 10%,#f70 100%);
+  }
+  
+  .btn:active {
+    background-color: #cf6a00;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.2) inset;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(10%,#f0a100),to(#f70));
+    background-image: linear-gradient(#f0a100 10%,#f70 100%);
+  } */

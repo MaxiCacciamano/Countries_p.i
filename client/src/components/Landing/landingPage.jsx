@@ -1,14 +1,20 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import Style from "./Landing.module.css";
+import style from './Landing.module.css';
 
-export default function LandinPage(){
+
+export function LandinPage(){
     return (
-        <div>
-            <h1>Bienvenidos paises</h1>
-            <Link to='/home'>
-                <button>Ingresar</button>
+        <div >
+          <div className={style.title}>
+            <h1>Discover te world</h1>
+          </div>
+            <button className={style.btn} >
+            <Link  to="/countries" className={style.home}  >
+              Home
             </Link>
+          </button>
         </div>
     )
 }
+export default LandinPage;
