@@ -48,7 +48,7 @@ const Countries = ()=>{
               return (
             <Country
               id={e.id}
-              flagimg={e.img}
+              img={e.img}
               name={e.name}
               region={e.region}
             />)})}

@@ -9,7 +9,7 @@ const Activity = ({ activities, countryName }) => {
     return (
       <div >
         <h3>Activities planed in {countryName}</h3>
-        <table className={style.activities}>
+        <table >
           <thead>
             <tr>
               <th>Name</th>
@@ -34,7 +34,7 @@ const Activity = ({ activities, countryName }) => {
       </div>
     );
   } else {
-    return <Link className={style.link} to="/activities"><h3>Plan activities for this country!</h3></Link>
+    return <Link  to="/activities"><h3>Plan activities for this country!</h3></Link>
   }
 };
 

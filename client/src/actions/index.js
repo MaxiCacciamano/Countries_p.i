@@ -1,8 +1,8 @@
 import axios from "axios";
 import {  
     GET_COUNTRIES,
-    GET_DETAIL,
     GET_NAME,
+    GET_DETAIL,
     ORD_ALPHA,
     ORD_ALPHA_REV,
     ORD_POP,
@@ -31,6 +31,13 @@ export function GetName(name){
     };
 }
 
+export function getDetail(id) {
+    return async (dispatch) => {
+      const res = await axios.get(`http://localhost:3001/countries/${id}`);
+      dispatch({ type: GET_DETAIL, payload: res.data });
+    };
+  }
+
 export function orderAlpha(){
     return{
       type: ORD_ALPHA,
@@ -55,21 +62,20 @@ export function orderPopRev(){
     }
 }
 
-export function orderCont(payload){
-    return{
-        type: ORD_CONTINENT,
-        payload,
-    }
-}
+export const orderCont = (payload) => {
+    return {
+      type: ORD_CONTINENT,
+      payload,
+    };
+  };
 
 export const showActiv = (payload)=>{
     return{
         type:SHOW_ACTIV,
         payload,
     }
-};
-
-export function createCountry(activity){
+}
+    export function createCountry(activity){
     return async function(){
         try{
             console.log("body de from"+activity)
@@ -80,4 +86,5 @@ export function createCountry(activity){
         }
         catch(err){throw new Error(err);}
     }
+
 };

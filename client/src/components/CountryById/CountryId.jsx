@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { getDetail } from "../../actions/actions";
-import  Activity  from "../Countries/ActivDetail";
+import { getDetail } from "../../actions/index";
+import  Activity  from '../Countries/ActivityDetail';
 // import style from "./countryId.module.css";
 
 const CountryId = ()=>{
@@ -31,7 +31,7 @@ const CountryId = ()=>{
                 <h5>Area:{detailtCountry.area}</h5>
                 <h5>Population:{detailtCountry.population}</h5>
                 <div>
-                    <Activity countryName={countryDetail.name} activities={countryDetail.activities}/>
+                    <Activity countryName={detailtCountry.name} activities={detailtCountry.activities}/>
                 </div>
             </div>
         </div>

@@ -1,13 +1,13 @@
 
 import React, { useEffect, useState } from "react";
-import { createCountry, getName } from "../../actions/actions";
+import { createCountry, GetName } from "../../actions/index";
 import { useDispatch, useSelector } from "react-redux";
-import { For_country} from "./SmallCountry";
+import { For_country} from "./For_country";
 // import style from "./form.module.css";
 import { Link } from "react-router-dom";
 
 const ActivityForm=()=>{
-    const countries = useSelector((state)=>{state.countries})
+    const countries = useSelector((state)=>state.countries)
     const [inputName, setInputName] = useState("");
     const [currentPage, setCurrentPage] = useState(0);
     const dispatch = useDispatch();
@@ -80,7 +80,7 @@ const ActivityForm=()=>{
 
 
     useEffect(()=>{
-        dispatch(getName(inputName))
+        dispatch(GetName(inputName))
     },[inputName])
 
     const submitForm=(e)=>{
@@ -99,7 +99,7 @@ const ActivityForm=()=>{
             <Link to="/countries">
                 <p>Welcom Logo</p>
             </Link>
-            <form onsubmit={()=>submitForm(e)}>
+            <form onsubmit={(e)=>submitForm(e)}>
             <div>
                 <input
                 type="text"

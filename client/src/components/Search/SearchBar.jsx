@@ -13,7 +13,7 @@ const SearchBar = () => {
         setInput(e.target.value);
     }
 
-    const handlerClick = (e)=>{
+    const handlerClick = ()=>{
         dispatch(GetName(input));
     }
 
@@ -29,8 +29,8 @@ const SearchBar = () => {
               autoComplete="off"
               onChange={(e)=>{inputHandler(e)}}
               />
-              <button onClick={handlerClick}>Search</button>
-              <button onClick={handlerReset}>Reset</button>
+              <button onClick={() => handlerClick()}>Search</button>
+              <button onClick={() => handlerReset()}>Reset</button>
        </div>
 )
 }

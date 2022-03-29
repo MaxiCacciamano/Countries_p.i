@@ -20,15 +20,13 @@ const getApiInfo = async () => {
            name: e.name.common,
            img: e.flags[0],
            continents: e.continents[0],
-           capital: e.capital + e.flags[0] , //?.[0] por alguna razon pregunto y accedo
-           subregion: e.subregion,  // de lo contrario no accedo
+           capital: e.capital + e.flags[0] , 
+           subregion: e.subregion,  
            area: e.area,
            population: e.population,
             }
         }) 
         const countryResutl = await Country.bulkCreate(apiInfo)
-        //// El metodo "bulkCreate" permite insertar multiples registros
-        // en la tabla de su base de datos con una sola llamada de funcion,
         // por ende cargamos los datos en la tabla con una sola llamada
         return countryResutl;
     }
@@ -57,24 +55,27 @@ const getDb = async()=>{
 
 const getApiActivity = async () => {
     try{
-        return Activity.findAll({
-            include:{
-                model: Country,
-                atributes:['name','img','continents','capital'],
-                through:{
-                    atributes:[]
-                }
-            }
-        })
+        getApiInfo.forEach(async (element) => {
+            await Country.findOrCreate({ where:  {
+            name: element.name,
+            id: element.id,
+            image: element.image,
+            continent: element.continent,
+            capital: element.capital,
+            subregion: element.subregion,
+            area: element.area,
+            population: element.population  
+            }})
+        });
     }
     catch(err){
         console.log("Error saving data", err);
     }
 }
 
-router.get('/activity',async( req,res)=>{
+router.get('/',async( req,res)=>{
     try{
-    const activities = await getApiActivity();
+    const activities = await Country.findAll({include:{model:Activity}});
     const {name}= req.query;
     res.status(200).send(activities);
 }
@@ -103,16 +104,21 @@ router.get('/countries', async(req, res, next)=>{
 
 router.get('/countries/:id', async(req,res)=>{
     try {
-        const idPais = req.params.idPais.toUpperCase()
-        const country = await Country.findByPk(idPais,
-            { include: Activity } 
-        )
-        country ? res.json(country) : res.sendStatus(404)
-        console.log(country)
+        const id = req.params.id
+        const getAll = await getAllCountries()
+        if(id){let countriesId = await getAll.filter((e)=>{e.id===id})
+        countriesId.length ?res.status(200).send(countriesId) :res.status(404)
+    }}
+    catch(e){console.log(e)}
+    //     const country = await Country.find(idPais,
+    //         { include: Activity } 
+    //     )
+    //     country ? res.json(idPais, country) : res.sendStatus(404)
+    //     console.log(country)
         
-    } catch (err) {
-        res.send(err);
-    }
+    // } catch (err) {
+    //     res.send(err);
+    // }
 })
 router.post('/activity', async(req,res)=>{
     let { id,
